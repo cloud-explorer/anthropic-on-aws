@@ -1,0 +1,7 @@
+.idea
+grobid/__pycache__
+__pycache__
+.venv
+.vscode
+temp/*
+*.DS_Store
