@@ -118,7 +118,11 @@ class InformationExtractor:
                 "role": 'user',
                 "content": [
                     *message_content,
-                    {"text": "Extract all information from this file"}
+                    {"text": '''Extract all information from this file
+                                If you find a visualization
+                                    - Provide a detailed description in natural language. Use domain specific language for the description.
+                                    - Do not transcribe text in the visualization after providing the description
+                     '''}
                 ]
             }]
             system_message = [

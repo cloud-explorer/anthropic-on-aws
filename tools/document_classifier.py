@@ -3,7 +3,7 @@ from utils.constants import ModelIDs
 from utils.bedrockutility import BedrockUtils
 
 UNKNOWN_TYPE = "UNK"
-DOCUMENT_TYPES = ["URLA", "DRIVERS_LICENSE", "W2", UNKNOWN_TYPE]
+DOCUMENT_TYPES = ["INTAKE_FORM", "INSURANCE_CARD", "DOC_NOTES", UNKNOWN_TYPE]
 
 class DocumentClassifier:
     def __init__(self, file_handler):
@@ -21,8 +21,6 @@ class DocumentClassifier:
         """
         Categorize documents based on their content.
         """
-        # TODO: Change once more document types are available
-        # return ["DOC_NOTES"]
         try:
             if len(file_paths) == 1:
                 # Single file handling

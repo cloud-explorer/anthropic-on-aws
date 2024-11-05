@@ -21,13 +21,15 @@ class ToolConfig:
                 The summary should be formatted in markdown and organized into clear sections. For each section, list the extracted 
                 entities and their corresponding values. Highlight all extracted values using backticks (`value`).
 
+                Add section for visualization summary, where a summary of any diagrams or visualization are captured
+                
                 Ensure that all extracted information is included and properly formatted. If any required information is missing 
                 or could not be extracted, indicate this with `NOT_FOUND`.
 
-                Finally provide a verification action the summarize the available information in a table similar to 
+                Finally if multiple documents are present, provide a verification action the summarize the available information in a table similar to 
                 Determine the information types available from the avilable documents to be comapred
                 [If a value is not found, make it NOT_FOUND and do not use it for match comparision]
-
+                [Show the below only when there are multiple types of document present. Do not show if there is only one doc]
                 ### Verification Actions
                 | Information Type | Intake Form | Insurance Form | Doc Notes |  Match Status |
                 |------------------|------|-------------------|-----|--------------|
@@ -239,7 +241,7 @@ class ToolConfig:
                                 },
                                 "required": ["type", "description"]
                                 },
-                                "description": "Summaries of any visualizations or drawings in the consultation notes"
+                                "description": "Summaries of any visualizations or drawings in the consultation notes. This could be in the form of a doctor drawing a part of the body and noting issues with it."
                             }
                             },
                             "required": ["date", "concern", "physicalExamFindings", "assessment", "visualizations"]

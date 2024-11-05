@@ -1,4 +1,3 @@
-from utils.fileutility import FileUtility
 
 class FileHandler:
     def __init__(self, file_util):

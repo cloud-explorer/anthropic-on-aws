@@ -4,9 +4,6 @@ from utils.fileutility import FileUtility
 from tools.file_handler import FileHandler
 from tools.document_classifier import DocumentClassifier
 from tools.information_extractor import InformationExtractor
-from tools.application_validator import ApplicationValidator
-from tools.dl_validator import DLValidator
-from tools.match_detector import MatchDetector
 from tools.tool_error import ToolError
 from dotenv import load_dotenv
 import json
@@ -23,9 +20,6 @@ class DocumentProcessor:
         # Initialize core processing classes
         self.classifier = DocumentClassifier(self.file_handler)
         self.extractor = InformationExtractor(self.file_handler)
-        self.validator = ApplicationValidator()
-        self.dl_validator = DLValidator()
-        self.match_detector = MatchDetector()
         
         # Initialize Bedrock utilities
         self.haiku_bedrock_utils = BedrockUtils(model_id=ModelIDs.anthropic_claude_3_haiku)

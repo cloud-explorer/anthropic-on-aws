@@ -75,25 +75,6 @@ with st.sidebar:
     temp = st.slider(label="Temperature", min_value=0.0, max_value=1.0, step=0.1, value=0.0, help="Temperature controls the level of randomness in the model's output")
     maxTokens = st.slider(label="Max Output Tokens", min_value=50, max_value=2048, value=2000, help="Output tokne controls the size of the output")
 
-    # st.header("Mortgage Application")
-    # borrower_personal_information = st.toggle('Personal Information (1a)', value=True, disabled=not st.session_state['button_enabled'])
-    # borrower_current_employer = st.toggle('Current Employer (1b)', value=False, disabled=not st.session_state['button_enabled'])
-    # borrower_assets = st.toggle('Assets (2a)', value=False, disabled=not st.session_state['button_enabled'])
-    # borrower_liabilities = st.toggle('Liabilities (2c)', value=False, disabled=not st.session_state['button_enabled'])  
-    # loan_info = st.toggle('Loan and Property Information (4a)', value=True, disabled=not st.session_state['button_enabled'])
-    # borrower_declarations = st.toggle('Declarations (5a, 5b)', value=False, disabled=not st.session_state['button_enabled'])
-    # loan_originator = st.toggle('Loan Originator Information', value=False, disabled=not st.session_state['button_enabled'])  
-
-    # st.header("Driver License")
-    # driver_information = st.toggle('Driver License', value=True, disabled=not st.session_state['button_enabled']) 
-
-    # st.header("W2")
-    # w2_information = st.toggle('W2 Information', value=True, disabled=not st.session_state['button_enabled'])
-
-    # st.header("Run Verification")
-    # run_verification = st.toggle('Run Verification', value=True, disabled=not st.session_state['button_enabled'])
-    
-    
     resolution_boost = st.slider(label="Resolution boost", min_value=1, max_value=10, value=1)
     width = st.slider(label="PDF width", min_value=100, max_value=1000, value=800) 
 
@@ -109,10 +90,7 @@ col1, col2= st.columns([6,4])
 
 with col1:
     st.title(title)
-    # st.subheader("Connecting Foundational Models to [external tools](https://docs.aws.amazon.com/bedrock/latest/userguide/tool-use.html).")
     st.subheader("Connecting Foundational Models to external tools.")
-    # st.subheader("Leverage Multi-Modal, Multi-Model generative AI and Function Calling for Intelligent Process Automation")
-     # Add the button before the file uploader
     process_button = st.button("Process Document", disabled=not st.session_state['button_enabled'])
     uploaded_file = st.file_uploader("Upload a document",
                                     type=("pdf"),
@@ -158,7 +136,7 @@ with col2:
                           "The package might contain various types of documents including insurance cards. Extract and save information from all documents provided. "
                           "Perform any preprocessing or classification of the file provided prior to the extraction." + 
                           "Set the enable_guardrails parameter to " + str(enable_guardrails) + ". " + 
-                          # "At the end, list all the tools that you had access to. Give an explantion on why each tool was used and if you are not using a tool, explain why it was not used as well" + 
+                          "At the end, list all the tools that you had access to. Give an explantion on why each tool was used and if you are not using a tool, explain why it was not used as well" + 
                           "Think step by step.")
                 processor.process_file(prompt=prompt, 
                                         placeholder=placeholder, 
