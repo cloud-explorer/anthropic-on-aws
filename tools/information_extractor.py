@@ -118,7 +118,8 @@ class InformationExtractor:
                 "role": 'user',
                 "content": [
                     *message_content,
-                    {"text": '''Extract all information from this file
+                    {"text": '''Extract all information from this file. 
+                                If it is a handwritten note include the transcription in a <transcript></transcript> tag. 
                                 If you find a visualization
                                     - Provide a detailed description in natural language. Use domain specific language for the description.
                                     - Do not transcribe text in the visualization after providing the description
@@ -134,16 +135,18 @@ class InformationExtractor:
                             Throughout the consultation, you maintain a professional, empathetic, and respectful demeanor, ensuring that the patient feels comfortable and supported in discussing their health concerns.
 
                             <important>
+                            Only use tools that are relevant based on the document classification results. Do not use a tool if the specified document type is not present.
                             Associate a confidence score to each extracted information. This should reflect how confident the model is the the extracted value matached the requested entitiy. Provide the confidence score in the output along with the extracted information.
                             </important>
 
                  '''}
             ]
-            response = None
+            response = self.sonnet_3_5_bedrock_utils.invoke_bedrock(message_list=message_list, 
+                                                                      system_message=system_message)
             if model_to_use and model_to_use == ToolConfig.SONNET_35:
                 print(f"Using model {model_to_use}")
                 # this a temporary inclusion to ensure that the Sonnet 3.5 throttling is not affecting the process
-                time.sleep(30)
+                time.sleep(45)
                 response = self.sonnet_3_5_bedrock_utils.invoke_bedrock(message_list=message_list, 
                                                                       system_message=system_message)
             elif model_to_use and model_to_use == ToolConfig.META_32:

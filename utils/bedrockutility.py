@@ -36,7 +36,7 @@ class BedrockUtils:
             model_id (str): The ID of the Bedrock model to use.
         """
         self.model_id = model_id
-        self.bedrock = boto3.client('bedrock-runtime', region_name='us-east-1')
+        self.bedrock = boto3.client('bedrock-runtime', region_name='us-west-2')
     def invoke_bedrock_with_guardrails(self, message_list, guardrail_config):
         """
         Invoke the Bedrock model with the provided message and guardrails.
@@ -189,7 +189,8 @@ class BedrockUtils:
         system_message = [
             {
                 "text": (
-                    "Answer the user's request using relevant tools (if they are available). Before calling a tool, do some analysis within \<thinking>\</thinking> tags. First, think about which of the provided tools is the relevant tool to answer the user's request. Second, go through each of the required parameters of the relevant tool and determine if the user has directly provided or given enough information to infer a value. When deciding if the parameter can be inferred, carefully consider all the context to see if it supports a specific value. If all of the required parameters are present or can be reasonably inferred, close the thinking tag and proceed with the tool call. BUT, if one of the values for a required parameter is missing, DO NOT invoke the function (not even with fillers for the missing params)."
+                    "Answer the user's request using relevant tools (if they are available). Before calling a tool, do some analysis within \<thinking>\</thinking> tags. First, the use classification tool. Based on the classification resulkt, think about which of the provided tools is the relevant tool to answer the user's request. Second, go through each of the required parameters of the relevant tool and determine if the user has directly provided or given enough information to infer a value. When deciding if the parameter can be inferred, carefully consider all the context to see if it supports a specific value. If all of the required parameters are present or can be reasonably inferred, close the thinking tag and proceed with the tool call. BUT, if one of the values for a required parameter is missing, DO NOT invoke the function (not even with fillers for the missing params)."
+                    "IMPORTANT: For any handwritten notes, make sure to include a full transcription in a <transcript></transcript> tag."
                     "Do not make up information. very important: keep the answer as concise as possible. Capture the required data, but do not generate information that is not requested"
                     "Before generating the information check multiple times if the information is correct. "
                     "If needed go back and read the information provided to understand what is being asked. "

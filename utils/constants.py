@@ -1,5 +1,7 @@
 class ModelIDs:
-    anthropic_claude_3_5_sonnet = "anthropic.claude-3-5-sonnet-20240620-v1:0"
+    anthropic_claude_3_5_sonnet = "arn:aws:bedrock:us-west-2:789068066945:application-inference-profile/wenjf6zdbcql"
+    #anthropic_claude_3_5_sonnet = "anthropic.claude-3-5-sonnet-20241022-v2:0"
+    # anthropic_claude_3_5_sonnet = "anthropic.claude-3-5-haiku-20241022-v1:0"
     anthropic_claude_3_sonnet = "anthropic.claude-3-sonnet-20240229-v1:0"
     anthropic_claude_3_opus = "anthropic.claude-3-opus-20240229-v1:0"
     anthropic_claude_3_haiku = "anthropic.claude-3-haiku-20240307-v1:0"
@@ -16,11 +18,11 @@ class ToolConfig:
     SONNET_35 = "SONNET_35"
     META_32 = "META_32"
 
-    SUMMARY_PROMPT = """
-                Provide a comprehensive summary of all entities extracted and actions performed during the consultation. 
+    SUMMARY_PROMPT = """ 
+                Provide a comprehensive summary of all entities extracted and actions performed during the consultation. Do not include any details about any tools used.
                 The summary should be formatted in markdown and organized into clear sections. For each section, list the extracted 
                 entities and their corresponding values. Highlight all extracted values using backticks (`value`).
-
+                Before summarizing the doctor's note, include the full transcript. Show only the innerText of the <transcript> tag.
                 Add section for visualization summary, where a summary of any diagrams or visualization are captured
                 
                 Ensure that all extracted information is included and properly formatted. If any required information is missing 
@@ -30,6 +32,7 @@ class ToolConfig:
                 Determine the information types available from the avilable documents to be comapred
                 [If a value is not found, make it NOT_FOUND and do not use it for match comparision]
                 [Show the below only when there are multiple types of document present. Do not show if there is only one doc]
+                
                 ### Verification Actions
                 | Information Type | Intake Form | Insurance Form | Doc Notes |  Match Status |
                 |------------------|------|-------------------|-----|--------------|
@@ -103,7 +106,7 @@ class ToolConfig:
         {
             "toolSpec": {
                 "name": "extract_consultation_notes",
-                "description": "Extract diagnostics information from a doctor's consultation notes.",
+                "description": "Extract diagnostics information from a doctor's consultation notes. Along with the extraction include the full transcript in a <transcript> node",
                 "inputSchema": {
                     "json": {
                         "type": "object",
@@ -261,7 +264,7 @@ class ToolConfig:
         {
             "toolSpec": {
                 "name": "extract_new_patient_info",
-                "description": "Extract new patient information from the attached document.",
+                "description": "If there is a new patient intake forme attached, use this to extract new patient information.",
                 "inputSchema": {
                     "json": {
                         "type": "object",
