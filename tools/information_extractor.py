@@ -142,19 +142,7 @@ class InformationExtractor:
                  '''}
             ]
             response = self.sonnet_3_5_bedrock_utils.invoke_bedrock(message_list=message_list, 
-                                                                      system_message=system_message)
-            if model_to_use and model_to_use == ToolConfig.SONNET_35:
-                print(f"Using model {model_to_use}")
-                # this a temporary inclusion to ensure that the Sonnet 3.5 throttling is not affecting the process
-                time.sleep(45)
-                response = self.sonnet_3_5_bedrock_utils.invoke_bedrock(message_list=message_list, 
-                                                                      system_message=system_message)
-            elif model_to_use and model_to_use == ToolConfig.META_32:
-                response = self.meta_32_util.invoke_bedrock(message_list=message_list, 
-                                                            system_message=system_message) 
-            else:
-                response = self.sonnet_3_bedrock_utils.invoke_bedrock(message_list=message_list, 
-                                                            system_message=system_message)       
+                                                                      system_message=system_message)    
             return [response['output']['message']]
         else:
             print("No file path found for extracting data")
