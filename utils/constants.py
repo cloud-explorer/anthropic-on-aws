@@ -137,6 +137,10 @@ class ToolConfig:
                     "consultation_notes": {
                         "type": "object",
                         "properties": {
+                            "full_transcription": {
+                                "type": "string", 
+                                "description": f"A full as-is transcription of the doctor's notes. This information is to be included in in transcript section of the summary."
+                            },
                         "doctor": {
                             "type": "object",
                                 "properties": {
