@@ -21,8 +21,7 @@ class ToolConfig:
     SUMMARY_PROMPT = """ 
                 Provide a comprehensive summary of all entities extracted and actions performed during the consultation. Do not include any details about any tools used.
                 The summary should be formatted in markdown and organized into clear sections. For each section, list the extracted 
-                entities and their corresponding values. Highlight all extracted values using backticks (`value`).
-                Before summarizing the doctor's note, display the transcript content directly without any XML tags.                
+                entities and their corresponding values. Highlight all extracted values using backticks (`value`).                
                 Add section for visualization summary, where a summary of any diagrams or visualization are captured
                 
                 Ensure that all extracted information is included and properly formatted. If any required information is missing 
@@ -37,7 +36,9 @@ class ToolConfig:
                 | Information Type | Intake Form | Insurance Form | Doc Notes |  Match Status |
                 |------------------|------|-------------------|-----|--------------|
                 | `field_name`        | `value` | `value` | `value` | 
-                
+
+                ### Transcription
+                [Full transcription of the doctor's notes wihout any XML tags]
                 """
     DOCUMENT_PROCESSING_PIPELINE = [
         {
